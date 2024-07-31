@@ -62,40 +62,4 @@ export const login = async (req: Request, res: Response): Promise<void> => {
         res.status(401).json({ error: 'Credenciales Inválidas' });
     }
 };
-// export const login = async (req: Request, res: Response): Promise<void> => {
-//     try {
-//         const { idToken } = req.body;
 
-//         // Verifica el idToken
-//         const decodedToken = await auth.verifyIdToken(idToken);
-//         const { uid, email } = decodedToken;
-//         console.log('tokenDecoded: ', decodedToken);
-//         // Verifica si el usuario existe en tu base de datos
-//         const userDoc = await db.collection('usuarios').doc(uid).get();
-//         if (!userDoc.exists) {
-//             res.status(404).json({ error: 'Usuario no encontrado en la base de datos' });
-//             return;
-//         }
-
-//         const userData = userDoc.data() as UserData;
-//         if (!userData || !userData.role) {
-//             res.status(500).json({ error: 'Error al obtener el rol del usuario' });
-//             return;
-//         }
-
-//         // Verifica que el email en el token coincida con el de la base de datos
-//         if (userData.email !== email) {
-//             res.status(401).json({ error: 'Email no coincide con los registros' });
-//             return;
-//         }
-
-//         // Actualiza los claims si es necesario
-//         await auth.setCustomUserClaims(uid, { role: userData.role });
-
-//         // Login exitoso
-//         res.json({ message: 'Login exitoso', role: userData.role });
-//     } catch (error) {
-//         console.error(error);
-//         res.status(401).json({ error: 'Credenciales Inválidas' });
-//     }
-// };
